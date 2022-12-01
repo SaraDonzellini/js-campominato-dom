@@ -38,3 +38,7 @@ div.box div.square {
 div.box div.square.clicked {
   background-color: rgb(0, 229, 255);
 }
+
+div.box div.square.bomb {
+  background-color: rgb(255, 0, 0);
+}
