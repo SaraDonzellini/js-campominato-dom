@@ -1,22 +1,26 @@
 const buttonPlay = document.querySelector(".btn");
 
+//? play start
 buttonPlay.addEventListener('click', function () {
   const divBoxElement = document.querySelector(".box");
-  divBoxElement.innerHTML = "";
+  const punteggioElement = document.getElementById('punteggio')
   let bombsArray = [];
   let punteggio = 0;
-  const punteggioElement = document.getElementById('punteggio')
+  let gameOver = false;
+  divBoxElement.innerHTML = "";
   punteggioElement.innerHTML = "";
   punteggio = 0;
-  let gameOver = false;
 
+  //? creazione nuove caselle
   for (let i = 0; i < 100; i++) {
     let newSquare;
     newSquare = getNewSquare();
     divBoxElement.appendChild(newSquare);
     newSquare.append(i + 1);
 
+    //? click delle caselle
     newSquare.addEventListener('click', function () {
+      
       if (!gameOver) {
 
         if (bombsArray.includes(i + 1)) {
@@ -40,10 +44,15 @@ buttonPlay.addEventListener('click', function () {
       }
     })
   }
+  //? creazione bombe
   for (let i = 0; i < 16; i++) {
     bombsArray.push(getRandomUniqueNumber(bombsArray, 1, 100));
   }
 })
+
+//!
+//! Funzioni 
+//!
 
 function getNewSquare() {
   const newSquare = document.createElement('div');
