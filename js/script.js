@@ -3,13 +3,12 @@ const buttonPlay = document.querySelector(".btn");
 buttonPlay.addEventListener('click', function () {
   const divBoxElement = document.querySelector(".box");
   divBoxElement.innerHTML = "";
-  
   let bombsArray = [];
   let punteggio = 0;
   const punteggioElement = document.getElementById('punteggio')
   punteggioElement.innerHTML = "";
   punteggio = 0;
-  let gameOver = false
+  let gameOver = false;
 
   for (let i = 0; i < 100; i++) {
     let newSquare;
@@ -19,16 +18,19 @@ buttonPlay.addEventListener('click', function () {
 
     newSquare.addEventListener('click', function () {
       if (!gameOver) {
+
         if (bombsArray.includes(i + 1)) {
           newSquare.classList.add('bomb');
           alert('Hai perso! Il tuo punteggio:' + ' ' + punteggio);
           gameOver = true;
-  
+
         } else {
+
           if (!newSquare.classList.contains("clicked")) {
             punteggio += 1;
             punteggioElement.innerHTML = punteggio;
             newSquare.classList.add('clicked');
+
             if (punteggio == 84) {
               alert('Hai Vinto! Il tuo punteggio:' + ' ' + punteggio);
             }
@@ -41,7 +43,6 @@ buttonPlay.addEventListener('click', function () {
   for (let i = 0; i < 16; i++) {
     bombsArray.push(getRandomUniqueNumber(bombsArray, 1, 100));
   }
-  console.log(bombsArray)
 })
 
 function getNewSquare() {
