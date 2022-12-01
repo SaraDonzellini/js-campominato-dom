@@ -9,6 +9,7 @@ buttonPlay.addEventListener('click', function () {
   const punteggioElement = document.getElementById('punteggio')
   punteggioElement.innerHTML = "";
   punteggio = 0;
+  let gameOver = false
 
   for (let i = 0; i < 100; i++) {
     let newSquare;
@@ -17,20 +18,23 @@ buttonPlay.addEventListener('click', function () {
     newSquare.append(i + 1);
 
     newSquare.addEventListener('click', function () {
-      if (bombsArray.includes(i + 1)) {
-        newSquare.classList.add('bomb');
-        alert('Hai perso! Il tuo punteggio:' + ' ' + punteggio);
-        punteggioElement.innerHTML = "";
-        punteggio = 0;
-
-      } else {
-        newSquare.classList.toggle('clicked');
-        if (punteggio == 84) {
-          alert('Hai Vinto! Il tuo punteggio:' + ' ' + punteggio);
+      if (!gameOver) {
+        if (bombsArray.includes(i + 1)) {
+          newSquare.classList.add('bomb');
+          alert('Hai perso! Il tuo punteggio:' + ' ' + punteggio);
+          gameOver = true;
+  
         } else {
-          punteggio += 1;
-          punteggioElement.innerHTML = punteggio;
+          if (!newSquare.classList.contains("clicked")) {
+            punteggio += 1;
+            punteggioElement.innerHTML = punteggio;
+            newSquare.classList.add('clicked');
+            if (punteggio == 84) {
+              alert('Hai Vinto! Il tuo punteggio:' + ' ' + punteggio);
+            }
+          }
         }
+
       }
     })
   }
