@@ -1,28 +1,32 @@
 const buttonPlay = document.querySelector(".btn");
 let bombsArray = [];
+let slotArray = [];
 
 buttonPlay.addEventListener('click', function () {
 
-    const divBoxElement = document.querySelector(".box");
-    divBoxElement.innerHTML = "";
-    divBoxElement.classList.add('my_border');
-    let newSquare;
+  const divBoxElement = document.querySelector(".box");
+  divBoxElement.innerHTML = "";
+  divBoxElement.classList.add('my_border');
+  let newSquare;
 
-    for (let i = 0; i < 100; i++) {
-      newSquare = getNewSquare();
-      divBoxElement.appendChild(newSquare);
-      newSquare.append(i + 1);
-    }
+  for (let i = 0; i < 100; i++) {
+    newSquare = getNewSquare();
+    divBoxElement.appendChild(newSquare);
+    newSquare.append(i + 1);
+    slotArray.push(i + 1)
+  }
 
-    for (let i = 0; i < 16; i++) {
-      bombsArray.push(getRandomUniqueNumber(bombsArray, 1, 100));
-    }
+  for (let i = 0; i < 16; i++) {
+    bombsArray.push(getRandomUniqueNumber(bombsArray, 1, 100));
+  }
 
-    
+
+
+  console.log(slotArray)
+  console.log(bombsArray)
 
 })
-
-console.log(bombsArray)
+// se il numero della casella è contenuto nell'array delle bombe aggiungo la classe "bomb"
 
 function getNewSquare() {
   const newSquare = document.createElement("div");
@@ -35,14 +39,14 @@ function getNewSquare() {
 }
 
 
-function getRandomUniqueNumber(blackList, min, max){
+function getRandomUniqueNumber(blackList, min, max) {
   let isValid = false;
   let randomNum;
 
   while (isValid === false) {
-    randomNum = getRandomNumber(min,max);
+    randomNum = getRandomNumber(min, max);
 
-    if (!blackList.includes(randomNum)){
+    if (!blackList.includes(randomNum)) {
       isValid = true;
     }
   }
@@ -51,10 +55,11 @@ function getRandomUniqueNumber(blackList, min, max){
 }
 
 
-function getRandomNumber (min, max){
+function getRandomNumber(min, max) {
   const numeroRandomico = Math.floor(Math.random() * (max - min + 1) + min);
 
   return numeroRandomico;
 }
+
 
 
