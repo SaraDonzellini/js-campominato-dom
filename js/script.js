@@ -1,40 +1,58 @@
 const buttonPlay = document.querySelector(".btn");
-let bombsArray = [];
 let slotArray = [];
 
 buttonPlay.addEventListener('click', function () {
-
+  
   const divBoxElement = document.querySelector(".box");
   divBoxElement.innerHTML = "";
   divBoxElement.classList.add('my_border');
-  let newSquare;
-
+  let bombsArray = [];
+  let punteggio = 0;
+  const punteggioElement = document.getElementById('punteggio')
+  
   for (let i = 0; i < 100; i++) {
+    let newSquare;
     newSquare = getNewSquare();
     divBoxElement.appendChild(newSquare);
     newSquare.append(i + 1);
     slotArray.push(i + 1)
-  }
+    
+    newSquare.addEventListener('click', function () {
+      if (bombsArray.includes(i + 1)) {
+        newSquare.classList.add('bomb');
+        alert('Hai perso')
+      } else {
+        newSquare.classList.toggle('clicked');
+        if (punteggio == 84) {
+          alert('Hai Vinto')
+        } else {
+          punteggio +=1;
+          punteggioElement.innerHTML = punteggio; 
+        }
+        
 
+    
+      }
+    })
+    
+  }
+  
   for (let i = 0; i < 16; i++) {
     bombsArray.push(getRandomUniqueNumber(bombsArray, 1, 100));
   }
-
-
-
+  
+  
   console.log(slotArray)
   console.log(bombsArray)
-
+  
 })
-// se il numero della casella è contenuto nell'array delle bombe aggiungo la classe "bomb"
+
+
 
 function getNewSquare() {
-  const newSquare = document.createElement("div");
+  const newSquare = document.createElement('div');
   newSquare.classList.add('square');
-
-  newSquare.addEventListener("click", function () {
-    newSquare.classList.toggle('clicked');
-  })
+  
   return newSquare;
 }
 
@@ -60,6 +78,4 @@ function getRandomNumber(min, max) {
 
   return numeroRandomico;
 }
-
-
 
