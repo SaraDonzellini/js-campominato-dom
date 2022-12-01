@@ -1,13 +1,14 @@
 const buttonPlay = document.querySelector(".btn");
 
 buttonPlay.addEventListener('click', function () {
-
   const divBoxElement = document.querySelector(".box");
   divBoxElement.innerHTML = "";
-  divBoxElement.classList.add('my_border');
+  
   let bombsArray = [];
   let punteggio = 0;
   const punteggioElement = document.getElementById('punteggio')
+  punteggioElement.innerHTML = "";
+  punteggio = 0;
 
   for (let i = 0; i < 100; i++) {
     let newSquare;
@@ -19,9 +20,9 @@ buttonPlay.addEventListener('click', function () {
       if (bombsArray.includes(i + 1)) {
         newSquare.classList.add('bomb');
         alert('Hai perso! Il tuo punteggio:' + ' ' + punteggio);
-        divBoxElement.innerHTML = "";
         punteggioElement.innerHTML = "";
         punteggio = 0;
+
       } else {
         newSquare.classList.toggle('clicked');
         if (punteggio == 84) {

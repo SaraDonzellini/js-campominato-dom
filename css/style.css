@@ -18,11 +18,10 @@ div.wrapper {
 div.box {
   width: 650px;
   height: 650px;
-}
-
-.my_border{
   border: 1px solid black;
 }
+
+
 
 
 div.box div.square {
